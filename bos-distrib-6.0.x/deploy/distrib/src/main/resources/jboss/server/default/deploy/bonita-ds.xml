@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!-- JBoss Server Configuration                                             -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+
+<datasources>
+
+	<xa-datasource>
+		<jndi-name>bonitaDS</jndi-name>
+		<use-java-context>false</use-java-context>
+		<xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+		<xa-datasource-property name="URL">jdbc:h2:tcp://localhost:${bonita.h2.port}/bonita_journal.db;MVCC=TRUE;IGNORECASE=TRUE</xa-datasource-property>
+		<xa-datasource-property name="User">sa</xa-datasource-property>
+		<xa-datasource-property name="Password"></xa-datasource-property>
+		<track-connection-by-tx/>
+	</xa-datasource>
+
+	<no-tx-datasource>
+		<jndi-name>bonitaSequenceManagerDS</jndi-name>
+		<connection-url>jdbc:h2:tcp://localhost:${bonita.h2.port}/bonita_journal.db;MVCC=TRUE;IGNORECASE=TRUE</connection-url>
+		<driver-class>org.h2.Driver</driver-class>
+		<use-java-context>false</use-java-context>
+		<user-name>sa</user-name>
+		<password></password>
+		<check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+		<background-validation-millis>30000</background-validation-millis>
+		<idle-timeout-minutes>0</idle-timeout-minutes>
+	</no-tx-datasource>
+
+    <!-- Start the H2 server in tcp mode -->
+    <mbean code="org.bonitasoft.jboss.jdbc.H2Database" name="jboss:service=BonitaH2">
+        <attribute name="Args">-tcp -tcpAllowOthers -tcpPort ${bonita.h2.port} -baseDir ${bonita.h2.base.dir}</attribute>
+    </mbean>
+
+
+</datasources>

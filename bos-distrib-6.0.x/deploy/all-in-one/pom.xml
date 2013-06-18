@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>deploy-parent</artifactId>
+		<groupId>org.bonitasoft.distrib</groupId>
+		<version>6.0.1-rc-02</version>
+	</parent>
+	
+	<artifactId>all-in-one</artifactId>
+	<name>all-in-one</name>
+	<packaging>war</packaging>
+
+	<dependencies>
+		<!-- needed for PlatformContextListener -->
+		<dependency>
+			<groupId>org.bonitasoft.platform</groupId>
+			<artifactId>platform-server-impl</artifactId>
+			<version>${bonita.web.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>.gwt-tmp/**,WEB-INF/deploy/**</packagingExcludes>
+					<webResources>	
+						<resource>	
+							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-webapps</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.bonitasoft.console</groupId>
+									<artifactId>console-war</artifactId>
+									<version>${bonita.web.version}</version>
+									<type>war</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
+									<excludes>WEB-INF/web.xml,WEB-INF/jetty-env.xml,WEB-INF/jetty.xml</excludes>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
