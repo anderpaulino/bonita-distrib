@@ -16,7 +16,6 @@
 		<tomcat_folder>${folderToZip}/Tomcat-${tomcat.version}</tomcat_folder>
 		<jboss_folder>${folderToZip}/Jboss-${jboss.version}</jboss_folder>
 		<migration_folder>${folderToZip}/migration</migration_folder>
-		<bitronix.version>2.1.3</bitronix.version>
 		<jboss-h2-mbean.version>1.1.0</jboss-h2-mbean.version>
 	</properties>
 
@@ -35,12 +34,10 @@
         <dependency>
             <groupId>org.codehaus.btm</groupId>
             <artifactId>btm</artifactId>
-            <version>${bitronix.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
-            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -49,12 +46,10 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.btm</groupId>
             <artifactId>btm-tomcat55-lifecycle</artifactId>
-            <version>${bitronix.version}</version>
         </dependency>
 	</dependencies>
    
@@ -110,7 +105,6 @@
 								<artifactItem>
 									<groupId>com.h2database</groupId>
 									<artifactId>h2</artifactId>
-									<version>${h2.version}</version>
 								</artifactItem>
 								<artifactItem>
 									<groupId>org.bonitasoft.web.tooling</groupId>
