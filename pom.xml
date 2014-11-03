@@ -36,14 +36,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.bonitasoft</groupId>
-				<artifactId>bonita-bom-component</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			
 			<!-- bonita web -->
 			<dependency>
 				<groupId>org.bonitasoft.console</groupId>
